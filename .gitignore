@@ -1,0 +1,3 @@
+*.gch
+build/
+compile_commands.json
