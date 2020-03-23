@@ -8,6 +8,9 @@
 #include <experimental/coroutine>
 #include "expected.hpp"
 
+#define trym co_await
+#define retm co_return
+
 template <typename T, typename E>
 struct either_promise {
   return_object_holder<tl::expected<T, E>>* data;

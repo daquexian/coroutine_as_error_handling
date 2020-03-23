@@ -1,5 +1,4 @@
 #include "either.h"
-#include "maybe.h"
 
 #include <iostream>
 #include <string>
@@ -8,23 +7,9 @@ using std::string;
 using tl::expected;
 using tl::make_unexpected;
 
-#define trym co_await
-#define retm co_return
-
-template<typename T, typename E>
-std::ostream &operator<<(std::ostream &out, const expected<T, E> exp) {
-    if (exp.has_value()) {
-        out << "Result: " << exp.value();
-    } else {
-        out << "Error:  " <<  exp.error();
-    }
-    return out;
-}
-
-
 expected<float, string> dividem(float a, float b) {
   if (b == 0) {
-    return make_unexpected("dividend in dividem is 0");
+    return make_unexpected("Dividend in dividem is 0");
   }
   return a / b;
 }

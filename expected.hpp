@@ -24,6 +24,8 @@
 #include <functional>
 #include <type_traits>
 #include <utility>
+#include <string>
+#include <iostream>
 
 #if defined(__EXCEPTIONS) || defined(_CPPUNWIND)
 #define TL_EXPECTED_EXCEPTIONS_ENABLED
@@ -2309,6 +2311,16 @@ constexpr bool operator!=(const expected<T, E> &x, const unexpected<E> &e) {
 template <class T, class E>
 constexpr bool operator!=(const unexpected<E> &e, const expected<T, E> &x) {
   return x.has_value() ? true : x.error() != e.value();
+}
+
+template<class T, class E>
+std::ostream &operator<<(std::ostream &out, const expected<T, E> e) {
+    if (e.has_value()) {
+        out << "Result: " << e.value();
+    } else {
+        out << "Error:  " << e.error();
+    }
+    return out;
 }
 
 template <class T, class E,
